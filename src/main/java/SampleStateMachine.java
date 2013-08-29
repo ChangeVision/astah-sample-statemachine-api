@@ -145,10 +145,6 @@ public class SampleStateMachine {
 		showMiniSeparator();
 	}
 
-	private static void showMiniSeparator() {
-		System.out.println("----");
-	}
-
 	/**
 	 * Vertexの入力側を表示します。
 	 * @param vertex
@@ -187,6 +183,10 @@ public class SampleStateMachine {
 			System.out.println(transition);
 		}
 		System.out.println("Transition end.");
+	}
+
+	private static void showMiniSeparator() {
+		System.out.println("----");
 	}
 
 	private static void showSeparator() {
