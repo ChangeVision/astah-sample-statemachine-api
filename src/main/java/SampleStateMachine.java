@@ -121,7 +121,7 @@ public class SampleStateMachine {
 	 */
 	private static void showVertex(IVertex vertex) {
 		showMiniSeparator();
-		System.out.println(vertex);
+		System.out.println("vertex : " + vertex);
 		showMiniSeparator();
 		showIncoming(vertex);
 		showMiniSeparator();
@@ -180,7 +180,7 @@ public class SampleStateMachine {
 		System.out.println("Transition start.");
 		ITransition[] transitions = machine.getTransitions();
 		for (ITransition transition : transitions) {
-			System.out.println(transition);
+			System.out.println("transition : " + transition);
 		}
 		System.out.println("Transition end.");
 	}
