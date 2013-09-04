@@ -46,7 +46,7 @@ public class SampleStateMachine {
 	}
 
 	/**
-	 * Statemachine Diagramという名前の要素を取得します。
+	 * Statemachine Diagram要素を取得します。
 	 * @param projectAccessor
 	 * @return 発見したモデル
 	 * @throws Exception
@@ -55,7 +55,7 @@ public class SampleStateMachine {
 			ProjectAccessor projectAccessor) throws Exception {
 		INamedElement[] foundElements = projectAccessor.findElements(new ModelFinder() {
 			public boolean isTarget(INamedElement namedElement) {
-				return namedElement.getName().equals("Statemachine Diagram");
+				return namedElement instanceof IStateMachineDiagram; 
 			}
 		});
 		return foundElements;
@@ -128,21 +128,37 @@ public class SampleStateMachine {
 		showOutgoing(vertex);
 		if (vertex instanceof IState) {
 			IState state = (IState) vertex;
-			IVertex[] subvertexes = state.getSubvertexes();
-			for (IVertex subvertex : subvertexes) {
-				showMiniSeparator();
-				System.out.println("found sub vertex");
-				showVertex(subvertex);
-				showMiniSeparator();
-			}
-			IStateMachine submachine = state.getSubmachine();
-			if (submachine != null) {
-				showMiniSeparator();
-				System.out.println("found sub machine");
-				showStateMachine(submachine);
-			}
+			showState(state);
 		}
 		showMiniSeparator();
+	}
+
+	/**
+	 * 状態の要素を表示します。
+	 * @param state
+	 * @see http://members.change-vision.com/javadoc/astah-api/6_7_0-43495/api/ja/doc/javadoc/com/change_vision/jude/api/inf/model/IState.html
+	 */
+	private static void showState(IState state) {
+		System.out.println("found vertex is a state.");
+		String entry = state.getEntry();
+		System.out.println("entry: " + entry);
+		String doActivity = state.getDoActivity();
+		System.out.println("do activity: " + doActivity);
+		String exit = state.getExit();
+		System.out.println("exit: " + exit);
+		IVertex[] subvertexes = state.getSubvertexes();
+		for (IVertex subvertex : subvertexes) {
+			showMiniSeparator();
+			System.out.println("found sub vertex");
+			showVertex(subvertex);
+			showMiniSeparator();
+		}
+		IStateMachine submachine = state.getSubmachine();
+		if (submachine != null) {
+			showMiniSeparator();
+			System.out.println("found sub machine");
+			showStateMachine(submachine);
+		}
 	}
 
 	/**
